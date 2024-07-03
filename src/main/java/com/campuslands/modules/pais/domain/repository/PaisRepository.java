@@ -11,5 +11,5 @@ public interface PaisRepository {
     void update(Pais pais);
     void delete(int id);
     Optional<Pais> findById(int id);
-    List<Pais> getAll();
+    List<Pais> findAll();
 }

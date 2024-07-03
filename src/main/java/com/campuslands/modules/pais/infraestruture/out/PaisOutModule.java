@@ -1,24 +1,23 @@
 package com.campuslands.modules.pais.infraestruture.out;
 
-import com.campuslands.modules.actor.aplication.ActorService;
-import com.campuslands.modules.actor.infrastructure.in.ActorAdapter;
-import com.campuslands.modules.actor.infrastructure.out.ActorMySQL;
+import com.campuslands.modules.pais.aplication.PaisService;
+import com.campuslands.modules.pais.infraestruture.in.PaisAdapter;
 
 public class PaisOutModule {
 
 
-    protected ActorMySQL MySQL;
-    protected ActorService service;
-    protected ActorAdapter adapter;
+    protected PaisMYSQL MySQL;
+    protected PaisService service;
+    protected PaisAdapter adapter;
 
     public PaisOutModule() {
-        MySQL = new ActorMySQL();
-        service = new ActorService(MySQL);
-        adapter = new ActorAdapter(service);
+        MySQL = new PaisMYSQL();
+        service = new PaisService(MySQL);
+        adapter = new PaisAdapter(service);
 
     }
 
-    public ActorAdapter module() {
+    public PaisAdapter module() {
         return adapter;
     }
 

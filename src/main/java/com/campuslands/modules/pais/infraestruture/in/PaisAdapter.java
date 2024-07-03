@@ -1,16 +1,16 @@
-package com.campuslands.modules.formato.insfrastructure.in;
+package com.campuslands.modules.pais.infraestruture.in;
 
 import java.util.Scanner;
 
-import com.campuslands.modules.formato.aplication.FormatoService;
-import com.campuslands.modules.formato.domain.models.Formato;
+import com.campuslands.modules.pais.aplication.PaisService;
+import com.campuslands.modules.pais.domain.models.Pais;
 import com.campuslands.modules.validation.InputVali;
 
-public class FormatoAdapter {
-     private final FormatoService formatoService;
+public class PaisAdapter {
+      private final PaisService paisService;
 
-    public FormatoAdapter(FormatoService formatoService) {
-        this.formatoService = formatoService;
+    public PaisAdapter(PaisService paisService) {
+        this.paisService = paisService;
     }
 
 
@@ -35,33 +35,33 @@ public class FormatoAdapter {
             case 1:
                 System.out.println("--- Menú de Creación de Actores ---");
                 String descripcion = inputVali.stringNotNull("Ingrese el nombre del Actor: ");
-                Formato newActor = new Formato(descripcion);
-                formatoService.createFormato(newActor);
+                Pais newActor = new Pais(descripcion);
+                paisService.createPais(newActor);
                 System.out.println("Actor registrado exitosamente!!");
                 break;
             
             case 2:
             System.out.println("--- Menú de Actualizacion de Actores ---");
             String descripcionUp = inputVali.stringNotNull("Ingrese el nombre del Actor: ");
-            Formato formatoUp = new Formato(descripcionUp);
-            formatoService.updateFormato(formatoUp);
+            Pais formatoUp = new Pais(descripcionUp);
+            paisService.updatePais(formatoUp);
             System.out.println("Actor registrado exitosamente!!");
             System.out.println("Actor ACtualizado exitosamente!!");
                 break;
             
             case 3:
                     int id = inputVali.readInt("Ingrese el ID del aeropuerto a buscar: " );
-                    formatoService.getFormatoById(id); 
+                    paisService.getPaisById(id); 
                 break;
             
             case 4:
                 int deleteId = inputVali.readInt("Ingrese el ID del aeropuerto a eliminar: ");
-                formatoService.deleteFormato(deleteId);;
+                paisService.deletePais(deleteId);
                 break;
             
             case 5:
                 
-                formatoService.getAllFormatos().forEach(a -> {
+                paisService.getAllPaises().forEach(a -> {
                     System.out.println("ID: " + a.getId() + ", descripcion: " + a.getDescription());
                     });
                 break;

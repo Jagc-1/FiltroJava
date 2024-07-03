@@ -82,7 +82,7 @@ public class PaisMYSQL extends MySQL implements PaisRepository{
     }
 
     @Override
-    public List<Pais> getAll() {
+    public List<Pais> findAll() {
         List<Pais> paises = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             String query = "SELECT id,description FROM pais";
