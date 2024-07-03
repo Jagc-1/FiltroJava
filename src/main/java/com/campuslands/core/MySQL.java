@@ -7,7 +7,7 @@ public class MySQL {
         protected final String password;
     
         public MySQL() {
-            this.url = "jdbc:mysql://localhost:3306/airport";
+            this.url = "jdbc:mysql://localhost:3306/cinecampus";
             this.user = "campus2023";
             this.password = "campus2023";
         }
