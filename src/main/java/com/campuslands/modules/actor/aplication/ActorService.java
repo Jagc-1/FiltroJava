@@ -13,7 +13,7 @@ public class ActorService {
         this.actorRepository  = actorRepository;
     }
 
-    public void saveActor(Actor actor) {
+    public void createActor(Actor actor) {
         actorRepository.save(actor);
     }
 
@@ -29,7 +29,8 @@ public class ActorService {
         actorRepository.delete(id);
     }
 
-    List<Actor> getAllAActors() {
-        return actorRepository.getAll();
+    public List<Actor> getAllActors() {
+        return actorRepository.findAll();
     }
+
 }

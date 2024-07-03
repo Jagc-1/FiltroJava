@@ -9,7 +9,7 @@ public interface ActorRepository {
 
     void save(Actor actor);
     void update(Actor actor);
-    void delete(int id);
     Optional<Actor> findById(int id);
-    List<Actor> getAll();
+    void delete(int id);
+    List<Actor> findAll();
 }

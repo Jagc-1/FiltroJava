@@ -8,11 +8,15 @@ public class Pais {
     public Pais() {
     }
 
-
     public Pais(int id, String description) {
         this.id = id;
         this.description = description;
     }
+    public Pais(String description) {
+
+        this.description = description;
+    }
+
 
 
     public int getId() {

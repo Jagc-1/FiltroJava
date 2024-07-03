@@ -6,6 +6,17 @@ public class Actor {
     private int idnacionalidad; 
     private int edad;
     private int idgenero;
+
+    public Actor(){
+        
+    }
+
+    public Actor(String nombre, int idnacionalidad, int edad, int idgenero) {
+        this.nombre = nombre;
+        this.idnacionalidad = idnacionalidad;
+        this.edad = edad;
+        this.idgenero = idgenero;
+    }
     
     public Actor(int id, String nombre, int idnacionalidad, int edad, int idgenero) {
         this.id = id;

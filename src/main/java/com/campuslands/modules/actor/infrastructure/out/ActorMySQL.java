@@ -38,7 +38,7 @@ public class ActorMySQL extends MySQL implements ActorRepository {
     @Override
     public void update(Actor actor) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "UPDATE actor SET name=?,idnacionalidad=?,edad=?,idgenero=?) WHERE id=?";
+            String query = "UPDATE actor SET name=?,idnacionalidad=?,edad=?,idgenero=? WHERE id=?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, actor.getNombre());
                 statement.setInt(2, actor.getIdnacionalidad());
@@ -89,10 +89,10 @@ public class ActorMySQL extends MySQL implements ActorRepository {
     }
 
     @Override
-    public List<Actor> getAll() {
+    public List<Actor> findAll() {
         List<Actor> actors = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "SELECT id,name,idnacionalidad,edad,idgenero FROM actor WHERE id=?";
+            String query = "SELECT id,name,idnacionalidad,edad,idgenero FROM actor";
             try (PreparedStatement statement = connection.prepareStatement(query); ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     Actor actor = new Actor(

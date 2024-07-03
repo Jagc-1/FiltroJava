@@ -10,24 +10,22 @@ import java.util.List;
 import java.util.Optional;
 
 import com.campuslands.core.MySQL;
+import com.campuslands.modules.pais.domain.models.Pais;
 import com.campuslands.modules.pais.domain.repository.PaisRepository;
 
 
 public class PaisMYSQL extends MySQL implements PaisRepository{
 
-    public PaisMySQL() {
-            super();
-        }
+    public PaisMYSQL() {
+        super();
+    }
 
     @Override
-    public void save(Actor actor) {
+    public void save(Pais pais) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "INSERT INTO actor (name,idnacionalidad,edad,idgenero) values (?,?,?,?) ";
+            String query = "INSERT INTO pais (description) values (?) ";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
-                statement.setString(1, actor.getNombre());
-                statement.setInt(2, actor.getIdnacionalidad());
-                statement.setInt(3, actor.getEdad());
-                statement.setInt(4, actor.getIdgenero());
+                statement.setString(1, pais.getDescription());
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
@@ -36,14 +34,12 @@ public class PaisMYSQL extends MySQL implements PaisRepository{
     }
 
     @Override
-    public void update(Actor actor) {
+    public void update(Pais pais) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "UPDATE actor SET name=?,idnacionalidad=?,edad=?,idgenero=?) WHERE id=?";
+            String query = "UPDATE pais SET description=? WHERE id=?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
-                statement.setString(1, actor.getNombre());
-                statement.setInt(2, actor.getIdnacionalidad());
-                statement.setInt(3, actor.getEdad());
-                statement.setInt(4, actor.getIdgenero());
+                statement.setString(1, pais.getDescription());
+                statement.setInt(2, pais.getId());
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
@@ -52,20 +48,17 @@ public class PaisMYSQL extends MySQL implements PaisRepository{
     }
 
     @Override
-    public Optional<Actor> findById(int id) {
+    public Optional<Pais> findById(int id) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "SELECT id,name,idnacionalidad,edad,idgenero FROM actor WHERE id=?";
+            String query = "SELECT id,description FROM pais WHERE id=?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, id);
                 try (ResultSet resultSet = statement.executeQuery()) {
                     if (resultSet.next()) {
-                        Actor actor = new Actor(
+                        Pais pais = new Pais(
                                 resultSet.getInt("id"),
-                                resultSet.getString("name"),
-                                resultSet.getInt("idnacionalidad"),
-                                resultSet.getInt("edad"),
-                                resultSet.getInt("idgenero"));
-                        return Optional.of(actor);
+                                resultSet.getString("description"));
+                        return Optional.of(pais);
                     }
                 }
             }
@@ -78,7 +71,7 @@ public class PaisMYSQL extends MySQL implements PaisRepository{
     @Override
     public void delete(int id) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "DELETE FROM actor WHERE id=?";
+            String query = "DELETE FROM pais WHERE id=?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, id);
                 statement.executeUpdate();
@@ -89,19 +82,16 @@ public class PaisMYSQL extends MySQL implements PaisRepository{
     }
 
     @Override
-    public List<Actor> getAll() {
-        List<Actor> actors = new ArrayList<>();
+    public List<Pais> getAll() {
+        List<Pais> paises = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "SELECT id,name,idnacionalidad,edad,idgenero FROM actor WHERE id=?";
+            String query = "SELECT id,description FROM pais";
             try (PreparedStatement statement = connection.prepareStatement(query); ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    Actor actor = new Actor(
+                    Pais pais = new Pais(
                             resultSet.getInt("id"),
-                            resultSet.getString("name"),
-                            resultSet.getInt("idnacionalidad"),
-                            resultSet.getInt("edad"),
-                            resultSet.getInt("idgenero"));
-                    actors.add(actor);
+                            resultSet.getString("description"));
+                    paises.add(pais);
 
                 }
             }
@@ -109,7 +99,7 @@ public class PaisMYSQL extends MySQL implements PaisRepository{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return actors;
+        return paises;
 
     }
 
